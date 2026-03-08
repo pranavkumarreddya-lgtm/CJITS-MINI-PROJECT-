@@ -4,15 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Pranav Pro-Project</title>
-    <link rel="stylesheet" href="style.css"> <style>
-        body { background: #121212; color: white; overflow-y: auto; height: auto; padding: 20px; }
+    <style>
+        body { background: #121212; color: white; font-family: sans-serif; padding: 20px; }
         .container { max-width: 900px; margin: auto; }
         .section { background: #1e1e1e; padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #333; }
-        h1 { color: #3498db; margin-bottom: 20px; }
-        textarea, input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #2d2d2d; color: white; }
-        .btn { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .priority-result { font-size: 20px; margin-top: 15px; font-weight: bold; }
-        .portfolio-preview { background: white; color: black; padding: 20px; border-radius: 10px; margin-top: 20px; display: none; text-align: left; }
+        h1 { color: #3498db; }
+        input, textarea { width: 100%; padding: 10px; margin: 8px 0; border-radius: 5px; border: none; background: #2d2d2d; color: white; }
+        .btn { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        
+        /* Portfolio Preview Styling */
+        #portfolioBox { 
+            background: white; color: black; padding: 30px; border-radius: 10px; 
+            margin-top: 20px; display: none; text-align: left; box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #3498db; margin-bottom: 15px; }
+        .port-header { border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 15px; }
+        
+        @media print {
+            body * { visibility: hidden; }
+            #portfolioBox, #portfolioBox * { visibility: visible; }
+            #portfolioBox { position: absolute; left: 0; top: 0; width: 100%; }
+            .no-print { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -21,61 +34,79 @@
 
         <div class="section">
             <h2>📧 Email Priority Predictor</h2>
-            <p>Paste your email content below to check priority:</p>
-            <textarea id="emailText" rows="5" placeholder="Type or paste email here..."></textarea>
-            <button class="btn" onclick="predictPriority()">Predict Priority 🔍</button>
-            <div id="result" class="priority-result"></div>
+            <textarea id="emailText" rows="3" placeholder="Paste email content..."></textarea>
+            <button class="btn" onclick="predictPriority()">Check Priority</button>
+            <div id="result" style="font-weight:bold; margin-top:10px;"></div>
         </div>
 
         <div class="section">
-            <h2>💼 Instant Portfolio Builder</h2>
-            <input type="text" id="pName" placeholder="Full Name">
-            <input type="text" id="pRole" placeholder="Role (e.g. Python Developer)">
-            <textarea id="pSkills" placeholder="Your Skills (comma separated)"></textarea>
-            <button class="btn" onclick="generatePortfolio()">Generate Portfolio ✨</button>
+            <h2>💼 Advanced Portfolio Builder</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <input type="text" id="pName" placeholder="Full Name">
+                <input type="text" id="pRole" placeholder="Role (e.g. Python Developer)">
+                <input type="text" id="pLang" placeholder="Languages Known (e.g. Telugu, English)">
+                <input type="text" id="pHobbies" placeholder="Hobbies">
+                <input type="text" id="pExp" placeholder="Experience/College Year">
+            </div>
+            <textarea id="pProjects" placeholder="Key Projects (one per line)"></textarea>
+            <p style="font-size: 12px; color: #aaa;">Upload Profile Photo:</p>
+            <input type="file" id="pPhoto" accept="image/*" onchange="previewImage(event)">
             
-            <div id="portfolioBox" class="portfolio-preview">
-                <h2 id="viewName"></h2>
-                <h4 id="viewRole" style="color: #3498db;"></h4>
-                <hr>
-                <p><strong>Skills:</strong> <span id="viewSkills"></span></p>
-                <button class="btn" onclick="window.print()" style="margin-top: 10px;">Download as PDF 📄</button>
+            <button class="btn" onclick="generatePortfolio()">Create Portfolio ✨</button>
+
+            <div id="portfolioBox">
+                <div class="port-header">
+                    <img id="viewPhoto" class="profile-img" src="" style="display:none;">
+                    <h2 id="viewName" style="margin:0;"></h2>
+                    <h4 id="viewRole" style="color: #3498db; margin:5px 0;"></h4>
+                </div>
+                <p><strong>📍 Experience:</strong> <span id="viewExp"></span></p>
+                <p><strong>🗣️ Languages:</strong> <span id="viewLang"></span></p>
+                <p><strong>🎨 Hobbies:</strong> <span id="viewHobbies"></span></p>
+                <div style="margin-top:15px;">
+                    <strong>🚀 Projects:</strong>
+                    <p id="viewProjects" style="white-space: pre-line; background: #f9f9f9; padding: 10px; border-radius: 5px;"></p>
+                </div>
+                <button class="btn no-print" onclick="window.print()" style="background: #27ae60;">Download PDF 📄</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Email Prediction Logic
-        function predictPriority() {
-            const text = document.getElementById('emailText').value.toLowerCase();
-            const resultDiv = document.getElementById('result');
-            
-            const highWords = ['urgent', 'important', 'immediate', 'deadline', 'emergency', 'asap', 'exam', 'result'];
-            const mediumWords = ['meeting', 'update', 'schedule', 'reminder', 'work', 'task'];
+        let photoData = "";
 
-            let priority = "Low Priority ⚪";
-            let color = "#aaa";
-
-            highWords.forEach(word => {
-                if(text.includes(word)) { priority = "High Priority 🔴"; color = "#ff4d4d"; }
-            });
-
-            if(priority.includes("Low")) {
-                mediumWords.forEach(word => {
-                    if(text.includes(word)) { priority = "Medium Priority 🟡"; color = "#f1c40f"; }
-                });
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                photoData = reader.result;
             }
-
-            resultDiv.innerText = priority;
-            resultDiv.style.color = color;
+            reader.readAsDataURL(event.target.files[0]);
         }
 
-        // Portfolio Logic
+        function predictPriority() {
+            const text = document.getElementById('emailText').value.toLowerCase();
+            const res = document.getElementById('result');
+            if(text.includes('urgent') || text.includes('exam')) { res.innerText = "🔴 High Priority"; res.style.color = "#ff4d4d"; }
+            else if(text.includes('meeting')) { res.innerText = "🟡 Medium Priority"; res.style.color = "#f1c40f"; }
+            else { res.innerText = "⚪ Low Priority"; res.style.color = "#aaa"; }
+        }
+
         function generatePortfolio() {
             document.getElementById('viewName').innerText = document.getElementById('pName').value;
             document.getElementById('viewRole').innerText = document.getElementById('pRole').value;
-            document.getElementById('viewSkills').innerText = document.getElementById('pSkills').value;
+            document.getElementById('viewExp').innerText = document.getElementById('pExp').value;
+            document.getElementById('viewLang').innerText = document.getElementById('pLang').value;
+            document.getElementById('viewHobbies').innerText = document.getElementById('pHobbies').value;
+            document.getElementById('viewProjects').innerText = document.getElementById('pProjects').value;
+            
+            if(photoData) {
+                const img = document.getElementById('viewPhoto');
+                img.src = photoData;
+                img.style.display = 'block';
+            }
+            
             document.getElementById('portfolioBox').style.display = 'block';
+            window.scrollTo(0, document.body.scrollHeight);
         }
     </script>
 </body>
