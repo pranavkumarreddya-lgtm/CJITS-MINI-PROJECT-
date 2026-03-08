@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Pranav Pro-Project</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        body { background: #121212; color: white; overflow-y: auto; height: auto; padding: 20px; }
+        .container { max-width: 900px; margin: auto; }
+        .section { background: #1e1e1e; padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #333; }
+        h1 { color: #3498db; margin-bottom: 20px; }
+        textarea, input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #2d2d2d; color: white; }
+        .btn { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .priority-result { font-size: 20px; margin-top: 15px; font-weight: bold; }
+        .portfolio-preview { background: white; color: black; padding: 20px; border-radius: 10px; margin-top: 20px; display: none; text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Pranav's Smart Dashboard</h1>
+
+        <div class="section">
+            <h2>📧 Email Priority Predictor</h2>
+            <p>Paste your email content below to check priority:</p>
+            <textarea id="emailText" rows="5" placeholder="Type or paste email here..."></textarea>
+            <button class="btn" onclick="predictPriority()">Predict Priority 🔍</button>
+            <div id="result" class="priority-result"></div>
+        </div>
+
+        <div class="section">
+            <h2>💼 Instant Portfolio Builder</h2>
+            <input type="text" id="pName" placeholder="Full Name">
+            <input type="text" id="pRole" placeholder="Role (e.g. Python Developer)">
+            <textarea id="pSkills" placeholder="Your Skills (comma separated)"></textarea>
+            <button class="btn" onclick="generatePortfolio()">Generate Portfolio ✨</button>
+            
+            <div id="portfolioBox" class="portfolio-preview">
+                <h2 id="viewName"></h2>
+                <h4 id="viewRole" style="color: #3498db;"></h4>
+                <hr>
+                <p><strong>Skills:</strong> <span id="viewSkills"></span></p>
+                <button class="btn" onclick="window.print()" style="margin-top: 10px;">Download as PDF 📄</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Email Prediction Logic
+        function predictPriority() {
+            const text = document.getElementById('emailText').value.toLowerCase();
+            const resultDiv = document.getElementById('result');
+            
+            const highWords = ['urgent', 'important', 'immediate', 'deadline', 'emergency', 'asap', 'exam', 'result'];
+            const mediumWords = ['meeting', 'update', 'schedule', 'reminder', 'work', 'task'];
+
+            let priority = "Low Priority ⚪";
+            let color = "#aaa";
+
+            highWords.forEach(word => {
+                if(text.includes(word)) { priority = "High Priority 🔴"; color = "#ff4d4d"; }
+            });
+
+            if(priority.includes("Low")) {
+                mediumWords.forEach(word => {
+                    if(text.includes(word)) { priority = "Medium Priority 🟡"; color = "#f1c40f"; }
+                });
+            }
+
+            resultDiv.innerText = priority;
+            resultDiv.style.color = color;
+        }
+
+        // Portfolio Logic
+        function generatePortfolio() {
+            document.getElementById('viewName').innerText = document.getElementById('pName').value;
+            document.getElementById('viewRole').innerText = document.getElementById('pRole').value;
+            document.getElementById('viewSkills').innerText = document.getElementById('pSkills').value;
+            document.getElementById('portfolioBox').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
