@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Pranav Pro-Dashboard</title>
+    <title>✨ Welcome | Pranav Pro-Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,19 +14,25 @@
     </div>
 
     <div class="login-card" id="login-form">
-        <h2>Welcome Pranav!</h2>
-        <input type="text" id="username" placeholder="Enter your Name">
+        <h2 class="welcome-text">✨ Welcome Pranav! ⚡</h2>
+        <p style="color: #666; margin-bottom: 20px;">Please login to enter your dashboard</p>
         
-        <div class="captcha-container">
-            <span id="captcha-code"></span>
-            <button type="button" onclick="generateCaptcha()">Refresh</button>
+        <div class="input-group">
+            <input type="text" id="username" placeholder="👤 Enter your Name">
         </div>
-        <input type="text" id="captcha-input" placeholder="Enter Captcha">
         
-        <button onclick="handleLogin()">Login to Dashboard</button>
+        <div class="captcha-box">
+            <span id="captcha-code">LOADING</span>
+            <button type="button" class="refresh-btn" onclick="generateCaptcha()">🔄</button>
+        </div>
+        
+        <div class="input-group">
+            <input type="text" id="captcha-input" placeholder="🔢 Enter Captcha Above">
+        </div>
+        
+        <button class="login-btn" onclick="handleLogin()">Login to Dashboard 🚀</button>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
