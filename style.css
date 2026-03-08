@@ -1,0 +1,27 @@
+body { background: #1a1a1a; font-family: sans-serif; overflow: hidden; }
+
+/* Login Card Styling */
+.login-card {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: white; padding: 2rem; border-radius: 10px; z-index: 10;
+}
+
+/* Door Styling */
+.door {
+    position: fixed; top: 0; width: 50%; height: 100%;
+    background: #442200; border: 5px solid #221100; transition: 2s; z-index: 5;
+}
+.left-door { left: 0; }
+.right-door { right: 0; }
+
+/* Person Silhouette */
+.person-silhouette {
+    position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+    width: 50px; height: 100px; background: black; border-radius: 50% 50% 0 0;
+    transition: 2s; z-index: 4; opacity: 0;
+}
+
+/* Animation Classes */
+.open-left { transform: translateX(-100%); }
+.open-right { transform: translateX(100%); }
+.enter-person { bottom: 20%; opacity: 1; }
