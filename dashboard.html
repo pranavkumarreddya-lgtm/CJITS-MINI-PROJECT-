@@ -3,99 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus AI | Professional Dashboard</title>
+    <title>Nexus AI | Elite Dashboard</title>
     <style>
-        :root { --primary: #3498db; --bg: #0f0f0f; --card: #1a1a1a; }
-        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; padding: 20px; line-height: 1.6; }
-        .container { max-width: 1000px; margin: auto; }
-        .section { background: var(--card); padding: 40px; border-radius: 20px; margin-bottom: 30px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h1 { font-size: 36px; text-align: center; color: var(--primary); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
-        h2 { font-size: 28px; border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 25px; }
+        :root { --accent: #00d2ff; --bg: #050505; --text: #ffffff; }
+        body { background: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; padding: 40px; }
+        .container { max-width: 1100px; margin: auto; }
         
-        /* Input Fields */
-        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-        input, textarea { background: #262626; border: 1px solid #444; color: white; padding: 15px; border-radius: 10px; font-size: 16px; width: 100%; box-sizing: border-box; }
-        textarea { grid-column: span 2; }
-        input:focus { border-color: var(--primary); outline: none; }
+        /* Input Section Glass Look */
+        .section { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 40px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; }
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        input, textarea { background: #111; border: 1px solid #333; color: white; padding: 15px; border-radius: 12px; font-size: 16px; }
+        textarea { grid-column: span 3; }
 
-        .btn { background: var(--primary); color: white; padding: 18px; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: bold; width: 100%; margin-top: 20px; transition: 0.3s; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
-
-        /* PORTFOLIO OUTPUT - LARGE & EFFECTIVE */
+        /* PORTFOLIO DESIGN - ELITE LOOK */
         #portfolioBox { 
-            background: white; color: #1a1a1a; padding: 60px; border-radius: 15px; 
-            margin-top: 50px; display: none; box-shadow: 0 0 50px rgba(255,255,255,0.1);
+            background: #fff; color: #000; padding: 80px; border-radius: 30px; 
+            margin-top: 60px; display: none; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
-        .port-header { display: flex; align-items: center; gap: 40px; border-bottom: 4px solid var(--primary); padding-bottom: 30px; margin-bottom: 40px; }
         
-        /* Large Photo Size */
-        .profile-img { width: 220px; height: 220px; border-radius: 20px; object-fit: cover; border: 6px solid var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        
-        .name-title h1 { font-size: 48px; margin: 0; color: #1a1a1a; text-align: left; }
-        .name-title h3 { font-size: 26px; color: var(--primary); margin: 5px 0; }
+        /* Header Section */
+        .port-header { display: flex; align-items: center; gap: 50px; margin-bottom: 60px; }
+        .profile-img { width: 250px; height: 250px; border-radius: 30px; object-fit: cover; border: 8px solid var(--accent); }
+        .main-title h1 { font-size: 60px; margin: 0; text-transform: uppercase; font-weight: 900; }
+        .main-title p { font-size: 24px; color: #555; margin-top: 5px; letter-spacing: 2px; }
 
-        /* Large Matter Text */
-        .info-item { font-size: 22px; margin: 20px 0; border-bottom: 1px dashed #ddd; padding-bottom: 10px; }
-        .info-item strong { color: var(--primary); min-width: 200px; display: inline-block; }
-        
-        .skill-tag { background: #eef7ff; color: var(--primary); padding: 10px 20px; border-radius: 10px; display: inline-block; margin: 5px; font-weight: bold; font-size: 18px; border: 1px solid #d0e8f8; }
-        
-        .project-box { background: #f9f9f9; padding: 30px; border-radius: 12px; margin-top: 30px; border-left: 8px solid var(--primary); }
-        .project-box p { font-size: 22px; line-height: 1.8; color: #333; }
+        /* Detail Blocks (Experience/Education Style) */
+        .detail-block { margin-bottom: 50px; }
+        .detail-title { font-size: 32px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; color: #000; }
+        .line { height: 5px; width: 100px; background: var(--accent); margin-bottom: 15px; border-radius: 5px; }
+        .detail-content { font-size: 24px; color: #333; font-weight: 500; }
 
-        @media print {
-            body * { visibility: hidden; }
-            #portfolioBox, #portfolioBox * { visibility: visible; }
-            #portfolioBox { position: absolute; left: 0; top: 0; width: 100%; padding: 40px; }
-            .no-print { display: none; }
-        }
+        /* Contact Bar */
+        .contact-bar { display: flex; gap: 30px; margin-top: 20px; font-size: 18px; font-weight: bold; color: var(--accent); }
+        
+        .skills-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .skill-chip { border: 2px solid #000; padding: 10px 25px; border-radius: 50px; font-weight: 900; font-size: 20px; }
+
+        @media print { .no-print { display: none; } }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🚀 Nexus AI: Professional Dashboard</h1>
-
     <div class="section">
-        <h2>💼 Portfolio Content Creator</h2>
+        <h2 style="color: var(--accent);">🛠️ Portfolio Architect</h2>
         <div class="input-grid">
-            <input type="text" id="pName" placeholder="Full Name (e.g., Aleti Pranav Kumar Reddy)">
-            <input type="text" id="pRole" placeholder="Professional Role (e.g., Python Developer)">
-            <input type="text" id="pSkills" placeholder="Skills (Python, AI, React - use commas)">
-            <input type="text" id="pLang" placeholder="Languages (Telugu, English, Hindi)">
-            <input type="text" id="pHobbies" placeholder="Hobbies">
-            <input type="text" id="pExp" placeholder="Education / Year">
-            <textarea id="pProjects" rows="5" placeholder="Detailed Projects Information..."></textarea>
+            <input type="text" id="pName" placeholder="Full Name">
+            <input type="text" id="pRole" placeholder="Current Role">
+            <input type="email" id="pEmail" placeholder="Email Address">
+            <input type="text" id="pPhone" placeholder="Mobile Number">
+            <input type="text" id="pLinkedIn" placeholder="LinkedIn Profile Link">
+            <input type="text" id="pSkills" placeholder="Skills (C, Python, Java)">
+            <input type="text" id="pExpTitle" placeholder="Heading (e.g. EXPERIENCE)">
+            <input type="text" id="pExpDesc" placeholder="Description (e.g. As a Python Developer)">
+            <input type="text" id="pEduTitle" placeholder="Heading (e.g. EDUCATION)">
+            <input type="text" id="pEduDesc" placeholder="Description (e.g. B.Tech at CJITS)">
+            <textarea id="pProjects" rows="4" placeholder="Significant Projects Details..."></textarea>
         </div>
-        <p style="margin-top:20px; font-weight:bold;">📸 Upload High-Resolution Photo:</p>
-        <input type="file" id="pPhoto" accept="image/*" onchange="previewImage(event)" style="border:none; padding-left:0;">
-        <button class="btn" onclick="generatePortfolio()">🚀 Generate High-Impact Portfolio</button>
+        <input type="file" id="pPhoto" accept="image/*" onchange="previewImage(event)" style="margin-top:20px; border:none;">
+        <button onclick="generatePortfolio()" style="width:100%; padding:20px; margin-top:20px; background:var(--accent); border:none; border-radius:15px; font-weight:bold; font-size:20px; cursor:pointer;">⚡ BUILD ELITE PORTFOLIO</button>
     </div>
 
     <div id="portfolioBox">
         <div class="port-header">
-            <img id="viewPhoto" class="profile-img" src="" style="display:none;">
-            <div class="name-title">
+            <img id="viewPhoto" class="profile-img" src="">
+            <div class="main-title">
                 <h1 id="viewName"></h1>
-                <h3 id="viewRole"></h3>
+                <p id="viewRole"></p>
+                <div class="contact-bar">
+                    <span id="viewEmail"></span> | <span id="viewPhone"></span>
+                </div>
+                <div id="viewLinkedIn" style="margin-top:10px; font-size:16px; color:#666;"></div>
             </div>
         </div>
 
-        <div class="info-item"><strong>🎓 Education:</strong> <span id="viewExp"></span></div>
-        <div class="info-item"><strong>🗣️ Languages:</strong> <span id="viewLang"></span></div>
-        <div class="info-item"><strong>🎨 Hobbies:</strong> <span id="viewHobbies"></span></div>
-        
-        <div style="margin: 30px 0;">
-            <strong style="font-size: 24px;">🛠️ Core Technical Skills:</strong><br>
-            <div id="viewSkills" style="margin-top:15px;"></div>
+        <div class="detail-block">
+            <div class="detail-title" id="viewExpTitle"></div>
+            <div class="line"></div>
+            <div class="detail-content" id="viewExpDesc"></div>
         </div>
 
-        <div class="project-box">
-            <strong style="font-size: 24px; color: var(--primary);">🚀 Featured Projects:</strong>
-            <p id="viewProjects"></p>
+        <div class="detail-block">
+            <div class="detail-title" id="viewEduTitle"></div>
+            <div class="line"></div>
+            <div class="detail-content" id="viewEduDesc"></div>
         </div>
 
-        <button class="btn no-print" onclick="window.print()" style="background: #27ae60; margin-top:40px; font-size:22px;">📥 Download Professional PDF</button>
+        <div class="detail-block">
+            <div class="detail-title">TECHNICAL MASTERY</div>
+            <div class="line"></div>
+            <div id="viewSkills" class="skills-container"></div>
+        </div>
+
+        <div class="detail-block">
+            <div class="detail-title">PROJECT SHOWCASE</div>
+            <div class="line"></div>
+            <div class="detail-content" id="viewProjects" style="white-space: pre-line;"></div>
+        </div>
+
+        <button class="no-print" onclick="window.print()" style="padding:20px 40px; background:#000; color:#fff; border-radius:15px; font-weight:bold; cursor:pointer; font-size:20px; width:100%;">📥 EXPORT AS PDF</button>
     </div>
 </div>
 
@@ -110,9 +116,14 @@
     function generatePortfolio() {
         document.getElementById('viewName').innerText = document.getElementById('pName').value;
         document.getElementById('viewRole').innerText = document.getElementById('pRole').value;
-        document.getElementById('viewExp').innerText = document.getElementById('pExp').value;
-        document.getElementById('viewLang').innerText = document.getElementById('pLang').value;
-        document.getElementById('viewHobbies').innerText = document.getElementById('pHobbies').value;
+        document.getElementById('viewEmail').innerText = "📧 " + document.getElementById('pEmail').value;
+        document.getElementById('viewPhone').innerText = "📱 " + document.getElementById('pPhone').value;
+        document.getElementById('viewLinkedIn').innerText = "🔗 LinkedIn: " + document.getElementById('pLinkedIn').value;
+        
+        document.getElementById('viewExpTitle').innerText = document.getElementById('pExpTitle').value;
+        document.getElementById('viewExpDesc').innerText = document.getElementById('pExpDesc').value;
+        document.getElementById('viewEduTitle').innerText = document.getElementById('pEduTitle').value;
+        document.getElementById('viewEduDesc').innerText = document.getElementById('pEduDesc').value;
         document.getElementById('viewProjects').innerText = document.getElementById('pProjects').value;
 
         const skills = document.getElementById('pSkills').value.split(',');
@@ -121,17 +132,13 @@
         skills.forEach(s => {
             if(s.trim() !== "") {
                 const span = document.createElement('span');
-                span.className = 'skill-tag';
-                span.innerText = s.trim();
+                span.className = 'skill-chip';
+                span.innerText = s.trim().toUpperCase();
                 skillContainer.appendChild(span);
             }
         });
 
-        if(photoData) {
-            const img = document.getElementById('viewPhoto');
-            img.src = photoData; img.style.display = 'block';
-        }
-
+        if(photoData) document.getElementById('viewPhoto').src = photoData;
         document.getElementById('portfolioBox').style.display = 'block';
         window.scrollTo({ top: document.getElementById('portfolioBox').offsetTop, behavior: 'smooth' });
     }
