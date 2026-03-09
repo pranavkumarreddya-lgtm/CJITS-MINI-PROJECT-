@@ -1,6 +1,7 @@
 function generateCaptcha() {
     const code = Math.random().toString(36).substring(2, 7).toUpperCase();
-    document.getElementById('captcha-code').innerText = code;
+    const display = document.getElementById('captcha-code');
+    if(display) display.innerText = code;
 }
 
 function handleLogin() {
@@ -8,15 +9,24 @@ function handleLogin() {
     const input = document.getElementById('captcha-input').value;
     const code = document.getElementById('captcha-code').innerText;
 
-    if (user && input === code) {
+    if (user.trim() !== "" && input === code) {
+        // Door Animation Trigger
         document.querySelector('.left-door').classList.add('open-left');
         document.querySelector('.right-door').classList.add('open-right');
         document.getElementById('person').classList.add('enter-person');
-        document.getElementById('login-form').style.opacity = '0';
-        setTimeout(() => { window.location.href = 'dashboard.html'; }, 2500);
+        
+        // Hide Login Form
+        const form = document.getElementById('login-form');
+        if(form) form.style.opacity = '0';
+
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 2500);
     } else {
-        alert("Invalid Details or Captcha!");
+        alert("Invalid Access Code or Username!");
         generateCaptcha();
     }
 }
+
+// Initial Load
 window.onload = generateCaptcha;
