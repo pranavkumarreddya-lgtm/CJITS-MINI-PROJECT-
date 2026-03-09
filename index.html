@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI | Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-circles">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+        <div class="circle c3"></div>
+    </div>
+
+    <div id="door-container">
+        <div class="door left-door"><div class="handle"></div></div>
+        <div class="door right-door"><div class="handle"></div></div>
+        <div class="person-silhouette" id="person"></div>
+    </div>
+
+    <div class="login-card" id="login-form">
+        <div class="icon-header">🚀</div>
+        <h2 class="welcome-text">WELCOME</h2>
+        <p class="subtitle">Nexus AI Autonomous System</p>
+        
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Full Name" autocomplete="off">
+        </div>
+        
+        <div class="captcha-section">
+            <div class="captcha-display">
+                <span id="captcha-code">----</span>
+                <button type="button" class="refresh-btn" onclick="generateCaptcha()">🔄</button>
+            </div>
+            <input type="text" id="captcha-input" placeholder="Enter Captcha">
+        </div>
+        
+        <button class="login-btn" onclick="handleLogin()">ACCESS SYSTEM ⚡</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
 
