@@ -1,26 +1,42 @@
+/* style.css motham deentho replace cheyi */
 :root { --primary: #00d2ff; --secondary: #3a7bd5; --bg: #050505; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Poppins', sans-serif; background: var(--bg); height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center; }
 
+/* Background Circles */
 .bg-circles { position: absolute; width: 100%; height: 100%; z-index: 1; }
 .circle { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; animation: float 8s infinite alternate; }
 .c1 { width: 300px; height: 300px; background: var(--primary); top: -5%; left: -5%; }
 .c2 { width: 400px; height: 400px; background: var(--secondary); bottom: -10%; right: -5%; }
 @keyframes float { from { transform: translateY(0); } to { transform: translateY(40px); } }
 
-.login-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 40px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); width: 380px; text-align: center; z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+/* Fix: Card visibility */
+.login-card { 
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(15px); 
+    padding: 40px; 
+    border-radius: 25px; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    width: 380px; 
+    text-align: center; 
+    z-index: 1000; /* Super high z-index */
+    position: relative; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6); 
+}
 .welcome-text { font-size: 32px; font-weight: 800; letter-spacing: 5px; color: #fff; }
 .subtitle { font-size: 11px; color: var(--primary); margin-bottom: 30px; }
 
+/* Inputs and Buttons */
 .input-group input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #333; background: #000; color: #fff; margin-bottom: 15px; }
 .captcha-display { display: flex; justify-content: space-between; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px; margin-bottom: 10px; }
 #captcha-code { font-size: 22px; font-weight: bold; color: var(--primary); letter-spacing: 5px; }
 .login-btn { width: 100%; padding: 15px; border-radius: 10px; border: none; background: linear-gradient(45deg, var(--primary), var(--secondary)); color: #fff; font-weight: bold; cursor: pointer; }
 
-.door { position: fixed; top: 0; width: 50%; height: 100%; background: #111; z-index: 50; transition: 2s cubic-bezier(.7,.05,.3,.9); }
-.left-door { left: 0; border-right: 2px solid #222; }
-.right-door { right: 0; border-left: 2px solid #222; }
-.open-left { transform: translateX(-100%) rotateY(-20deg); }
-.open-right { transform: translateX(100%) rotateY(20deg); }
-.person-silhouette { position: fixed; bottom: -150px; left: 50%; transform: translateX(-50%); width: 60px; height: 120px; background: #000; border-radius: 30px 30px 0 0; opacity: 0; z-index: 45; transition: 2s; }
+/* Door logic */
+.door { position: fixed; top: 0; width: 50%; height: 100%; background: #111; z-index: 500; transition: 2s; }
+.left-door { left: 0; border-right: 1px solid #222; }
+.right-door { right: 0; border-left: 1px solid #222; }
+.open-left { transform: translateX(-100%); }
+.open-right { transform: translateX(100%); }
+.person-silhouette { position: fixed; bottom: -150px; left: 50%; transform: translateX(-50%); width: 60px; height: 120px; background: #000; border-radius: 30px; opacity: 0; z-index: 450; transition: 2s; }
 .enter-person { bottom: 30%; opacity: 1; }
