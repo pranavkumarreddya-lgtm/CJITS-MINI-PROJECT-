@@ -2,147 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus AI | Elite Dashboard</title>
+    <title>Nexus AI Dashboard</title>
     <style>
-        :root { --accent: #00d2ff; --bg: #050505; --text: #ffffff; }
-        body { background: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; padding: 40px; }
-        .container { max-width: 1100px; margin: auto; }
-        
-        /* Input Section Glass Look */
-        .section { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 40px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; }
-        .input-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-        input, textarea { background: #111; border: 1px solid #333; color: white; padding: 15px; border-radius: 12px; font-size: 16px; }
-        textarea { grid-column: span 3; }
-
-        /* PORTFOLIO DESIGN - ELITE LOOK */
-        #portfolioBox { 
-            background: #fff; color: #000; padding: 80px; border-radius: 30px; 
-            margin-top: 60px; display: none; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-        
-        /* Header Section */
-        .port-header { display: flex; align-items: center; gap: 50px; margin-bottom: 60px; }
-        .profile-img { width: 250px; height: 250px; border-radius: 30px; object-fit: cover; border: 8px solid var(--accent); }
-        .main-title h1 { font-size: 60px; margin: 0; text-transform: uppercase; font-weight: 900; }
-        .main-title p { font-size: 24px; color: #555; margin-top: 5px; letter-spacing: 2px; }
-
-        /* Detail Blocks (Experience/Education Style) */
-        .detail-block { margin-bottom: 50px; }
-        .detail-title { font-size: 32px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; color: #000; }
-        .line { height: 5px; width: 100px; background: var(--accent); margin-bottom: 15px; border-radius: 5px; }
-        .detail-content { font-size: 24px; color: #333; font-weight: 500; }
-
-        /* Contact Bar */
-        .contact-bar { display: flex; gap: 30px; margin-top: 20px; font-size: 18px; font-weight: bold; color: var(--accent); }
-        
-        .skills-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
-        .skill-chip { border: 2px solid #000; padding: 10px 25px; border-radius: 50px; font-weight: 900; font-size: 20px; }
-
-        @media print { .no-print { display: none; } }
+        :root { --acc: #00d2ff; --bg: #050505; }
+        body { background: var(--bg); color: #fff; font-family: 'Poppins', sans-serif; padding: 40px; }
+        .section { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; border: 1px solid #333; margin-bottom: 40px; }
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        input, textarea { background: #111; border: 1px solid #333; color: #fff; padding: 15px; border-radius: 10px; }
+        textarea { grid-column: span 2; }
+        #portfolioBox { background: #fff; color: #000; padding: 60px; border-radius: 20px; display: none; margin-top: 40px; }
+        .port-header { display: flex; align-items: center; gap: 40px; margin-bottom: 50px; border-bottom: 4px solid var(--acc); padding-bottom: 20px; }
+        .profile-img { width: 200px; height: 200px; border-radius: 20px; border: 5px solid var(--acc); object-fit: cover; }
+        .name-title h1 { font-size: 50px; margin: 0; text-transform: uppercase; }
+        .detail-block { margin-bottom: 40px; }
+        .detail-title { font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+        .line { height: 5px; width: 80px; background: var(--acc); margin-bottom: 10px; }
+        .detail-content { font-size: 22px; color: #333; }
+        .skill-chip { border: 2px solid #000; padding: 8px 20px; border-radius: 50px; display: inline-block; margin: 5px; font-weight: bold; }
+        @media print { .no-print { display: none; } #portfolioBox { display: block; position: absolute; top:0; left:0; width:100%; } }
     </style>
 </head>
 <body>
-
-<div class="container">
     <div class="section">
-        <h2 style="color: var(--accent);">🛠️ Portfolio Architect</h2>
+        <h1 style="color:var(--acc)">🚀 Portfolio Architect</h1>
         <div class="input-grid">
             <input type="text" id="pName" placeholder="Full Name">
-            <input type="text" id="pRole" placeholder="Current Role">
-            <input type="email" id="pEmail" placeholder="Email Address">
-            <input type="text" id="pPhone" placeholder="Mobile Number">
-            <input type="text" id="pLinkedIn" placeholder="LinkedIn Profile Link">
-            <input type="text" id="pSkills" placeholder="Skills (C, Python, Java)">
-            <input type="text" id="pExpTitle" placeholder="Heading (e.g. EXPERIENCE)">
-            <input type="text" id="pExpDesc" placeholder="Description (e.g. As a Python Developer)">
-            <input type="text" id="pEduTitle" placeholder="Heading (e.g. EDUCATION)">
-            <input type="text" id="pEduDesc" placeholder="Description (e.g. B.Tech at CJITS)">
-            <textarea id="pProjects" rows="4" placeholder="Significant Projects Details..."></textarea>
+            <input type="text" id="pRole" placeholder="Role">
+            <input type="text" id="pEmail" placeholder="Email">
+            <input type="text" id="pPhone" placeholder="Mobile">
+            <input type="text" id="pExpTitle" placeholder="Exp Title (e.g. EXPERIENCE)">
+            <textarea id="pExpDesc" placeholder="Exp Details"></textarea>
+            <input type="text" id="pSkills" placeholder="Skills (comma separated)">
+            <textarea id="pProjects" placeholder="Project Details"></textarea>
         </div>
-        <input type="file" id="pPhoto" accept="image/*" onchange="previewImage(event)" style="margin-top:20px; border:none;">
-        <button onclick="generatePortfolio()" style="width:100%; padding:20px; margin-top:20px; background:var(--accent); border:none; border-radius:15px; font-weight:bold; font-size:20px; cursor:pointer;">⚡ BUILD ELITE PORTFOLIO</button>
+        <input type="file" id="pPhoto" accept="image/*" onchange="previewImage(event)" style="margin-top:20px;">
+        <button onclick="generatePortfolio()" style="width:100%; padding:20px; margin-top:20px; background:var(--acc); border:none; border-radius:10px; font-weight:bold; cursor:pointer;">BUILD PORTFOLIO ⚡</button>
     </div>
 
     <div id="portfolioBox">
         <div class="port-header">
             <img id="viewPhoto" class="profile-img" src="">
-            <div class="main-title">
-                <h1 id="viewName"></h1>
-                <p id="viewRole"></p>
-                <div class="contact-bar">
-                    <span id="viewEmail"></span> | <span id="viewPhone"></span>
-                </div>
-                <div id="viewLinkedIn" style="margin-top:10px; font-size:16px; color:#666;"></div>
-            </div>
+            <div class="name-title"><h1 id="viewName"></h1><p id="viewRole" style="font-size:24px; color:#555;"></p></div>
         </div>
-
-        <div class="detail-block">
-            <div class="detail-title" id="viewExpTitle"></div>
-            <div class="line"></div>
-            <div class="detail-content" id="viewExpDesc"></div>
-        </div>
-
-        <div class="detail-block">
-            <div class="detail-title" id="viewEduTitle"></div>
-            <div class="line"></div>
-            <div class="detail-content" id="viewEduDesc"></div>
-        </div>
-
-        <div class="detail-block">
-            <div class="detail-title">TECHNICAL MASTERY</div>
-            <div class="line"></div>
-            <div id="viewSkills" class="skills-container"></div>
-        </div>
-
-        <div class="detail-block">
-            <div class="detail-title">PROJECT SHOWCASE</div>
-            <div class="line"></div>
-            <div class="detail-content" id="viewProjects" style="white-space: pre-line;"></div>
-        </div>
-
-        <button class="no-print" onclick="window.print()" style="padding:20px 40px; background:#000; color:#fff; border-radius:15px; font-weight:bold; cursor:pointer; font-size:20px; width:100%;">📥 EXPORT AS PDF</button>
+        <div class="detail-block"><div class="detail-title" id="viewExpTitle"></div><div class="line"></div><div class="detail-content" id="viewExpDesc"></div></div>
+        <div class="detail-block"><div class="detail-title">SKILLS</div><div class="line"></div><div id="viewSkills"></div></div>
+        <div class="detail-block"><div class="detail-title">PROJECTS</div><div class="line"></div><div class="detail-content" id="viewProjects"></div></div>
+        <button class="no-print" onclick="window.print()" style="width:100%; padding:20px; background:#000; color:#fff; border-radius:10px; cursor:pointer;">DOWNLOAD PDF</button>
     </div>
-</div>
 
-<script>
-    let photoData = "";
-    function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = () => photoData = reader.result;
-        reader.readAsDataURL(event.target.files[0]);
-    }
-
-    function generatePortfolio() {
-        document.getElementById('viewName').innerText = document.getElementById('pName').value;
-        document.getElementById('viewRole').innerText = document.getElementById('pRole').value;
-        document.getElementById('viewEmail').innerText = "📧 " + document.getElementById('pEmail').value;
-        document.getElementById('viewPhone').innerText = "📱 " + document.getElementById('pPhone').value;
-        document.getElementById('viewLinkedIn').innerText = "🔗 LinkedIn: " + document.getElementById('pLinkedIn').value;
-        
-        document.getElementById('viewExpTitle').innerText = document.getElementById('pExpTitle').value;
-        document.getElementById('viewExpDesc').innerText = document.getElementById('pExpDesc').value;
-        document.getElementById('viewEduTitle').innerText = document.getElementById('pEduTitle').value;
-        document.getElementById('viewEduDesc').innerText = document.getElementById('pEduDesc').value;
-        document.getElementById('viewProjects').innerText = document.getElementById('pProjects').value;
-
-        const skills = document.getElementById('pSkills').value.split(',');
-        const skillContainer = document.getElementById('viewSkills');
-        skillContainer.innerHTML = "";
-        skills.forEach(s => {
-            if(s.trim() !== "") {
-                const span = document.createElement('span');
-                span.className = 'skill-chip';
-                span.innerText = s.trim().toUpperCase();
-                skillContainer.appendChild(span);
-            }
-        });
-
-        if(photoData) document.getElementById('viewPhoto').src = photoData;
-        document.getElementById('portfolioBox').style.display = 'block';
-        window.scrollTo({ top: document.getElementById('portfolioBox').offsetTop, behavior: 'smooth' });
-    }
-</script>
-
+    <script>
+        let photoData = "";
+        function previewImage(e) { const r = new FileReader(); r.onload = () => photoData = r.result; r.readAsDataURL(e.target.files[0]); }
+        function generatePortfolio() {
+            document.getElementById('viewName').innerText = document.getElementById('pName').value;
+            document.getElementById('viewRole').innerText = document.getElementById('pRole').value;
+            document.getElementById('viewExpTitle').innerText = document.getElementById('pExpTitle').value;
+            document.getElementById('viewExpDesc').innerText = document.getElementById('pExpDesc').value;
+            document.getElementById('viewProjects').innerText = document.getElementById('pProjects').value;
+            const sc = document.getElementById('viewSkills'); sc.innerHTML = "";
+            document.getElementById('pSkills').value.split(',').forEach(s => {
+                if(s.trim()){ const sp = document.createElement('span'); sp.className='skill-chip'; sp.innerText=s.trim().toUpperCase(); sc.appendChild(sp); }
+            });
+            if(photoData) document.getElementById('viewPhoto').src = photoData;
+            document.getElementById('portfolioBox').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
