@@ -1,99 +1,90 @@
+:root {
+    --primary: #00d2ff;
+    --secondary: #3a7bd5;
+    --bg-dark: #050505;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body { 
-    background: #121212; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
-/* Login Card */
+/* Floating Background Circles */
+.bg-circles { position: absolute; width: 100%; height: 100%; overflow: hidden; z-index: 1; }
+.circle { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 10s infinite alternate; }
+.c1 { width: 400px; height: 400px; background: var(--primary); top: -10%; left: -10%; }
+.c2 { width: 350px; height: 350px; background: var(--secondary); bottom: -10%; right: -10%; animation-delay: 2s; }
+.c3 { width: 300px; height: 300px; background: #ff00c8; top: 40%; left: 50%; animation-delay: 4s; }
+
+@keyframes float {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(50px) scale(1.1); }
+}
+
+/* Glassmorphism Login Card */
 .login-card {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 50px 40px;
+    border-radius: 30px;
+    width: 400px;
     text-align: center;
-    width: 350px;
-    position: relative;
     z-index: 10;
-    transition: 0.5s;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    transition: 0.8s ease-in-out;
 }
 
-.welcome-text {
-    color: #1a1a1a;
-    font-size: 26px;
-    margin-bottom: 5px;
-}
+.icon-header { font-size: 50px; margin-bottom: 10px; }
+.welcome-text { font-size: 32px; font-weight: 800; letter-spacing: 5px; color: #fff; }
+.subtitle { font-size: 12px; color: var(--primary); margin-bottom: 30px; font-weight: 600; text-transform: uppercase; }
 
+.input-group { text-align: left; margin-bottom: 20px; }
+.input-group label { display: block; color: #aaa; font-size: 12px; margin-left: 5px; margin-bottom: 5px; }
 .input-group input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    outline: none;
+    width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.3); color: white; font-size: 16px; outline: none;
 }
 
-/* Captcha Design */
-.captcha-box {
-    background: #f0f0f0;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 10px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    border: 2px dashed #3498db;
+/* Captcha Styling */
+.captcha-section { margin-bottom: 25px; }
+.captcha-display {
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 12px; margin-bottom: 10px;
 }
-
-#captcha-code {
-    font-size: 24px;
-    font-weight: bold;
-    color: #e74c3c;
-    letter-spacing: 5px;
-    user-select: none;
-}
-
-.refresh-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
+#captcha-code { font-size: 24px; font-weight: 800; letter-spacing: 8px; color: var(--primary); user-select: none; }
+.refresh-btn { background: none; border: none; cursor: pointer; font-size: 20px; }
+.captcha-section input { width: 100%; padding: 12px; border-radius: 10px; background: none; border: 1px solid rgba(255,255,255,0.2); color: white; text-align: center; }
 
 .login-btn {
-    width: 100%;
-    padding: 12px;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
+    width: 100%; padding: 18px; border-radius: 15px; border: none;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s;
 }
+.login-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary); }
 
-/* Door Animation */
-.door {
-    position: fixed; top: 0; width: 50%; height: 100%;
-    background: #3d2b1f; border: 4px solid #261a12; transition: 2s ease-in-out; z-index: 5;
-}
-.left-door { left: 0; border-right: 2px solid #1a1a1a; }
-.right-door { right: 0; border-left: 2px solid #1a1a1a; }
+/* Door Animation - High Quality */
+.door { position: fixed; top: 0; width: 50%; height: 100%; background: #1a0f00; border: 10px solid #110900; transition: 2.5s cubic-bezier(.74,.06,.4,.92); z-index: 50; }
+.left-door { left: 0; }
+.right-door { right: 0; }
+.door-handle { position: absolute; top: 50%; width: 20px; height: 100px; background: gold; border-radius: 10px; box-shadow: 0 0 10px rgba(255,215,0,0.5); }
+.left-door .door-handle { right: 20px; }
+.right-door .door-handle { left: 20px; }
 
 .person-silhouette {
-    position: fixed; bottom: -150px; left: 50%; transform: translateX(-50%);
-    width: 60px; height: 120px; background: #000; border-radius: 30px 30px 0 0;
-    transition: 2s; z-index: 4; opacity: 0;
+    position: fixed; bottom: -200px; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 160px; background: black; border-radius: 40px 40px 0 0;
+    transition: 2.5s ease-in-out; z-index: 40; opacity: 0; filter: blur(2px);
 }
 
-/* Animation Classes */
-.open-left { transform: translateX(-100%); }
-.open-right { transform: translateX(100%); }
-.enter-person { bottom: 30%; opacity: 1; }
+/* Open Animation Classes */
+.open-left { transform: translateX(-100%) rotateY(-20deg); }
+.open-right { transform: translateX(100%) rotateY(20deg); }
+.enter-person { bottom: 35%; opacity: 1; }
